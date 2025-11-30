@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import e from "express";
 dotenv.config();
 
 const port = process.env.PORT;
@@ -101,6 +100,30 @@ app.post("/eligible",(req,res)=>{
         res.status(500).json({msg:error})
     }
 })
+
+app.post("/max",(req,res)=>{
+    try {
+        // let input = req.body.array;
+        // let max = ;
+        // for(let x of input){
+        //     if(max>x){
+        //     max = max
+        //     }else{
+        //     max = x
+        //     }
+        // }
+        let input = req.body.array;
+        input.sort((x,y)=> y-x)
+        let maxnum = input[0]
+        let minnum = input[input.length-1]
+        res.status(200).json({msg:`Maximum element in an array : ${maxnum}`, msg1:`Minimum element is ${minnum}`})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({msg:error})
+    }
+})
+
+// let fahrhenheit = (celsius * 1.8) + 32;
 
 
 
